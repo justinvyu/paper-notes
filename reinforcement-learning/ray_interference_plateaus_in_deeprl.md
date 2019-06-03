@@ -7,7 +7,6 @@ Tom Schaul, Diana Borsa, Joseph Modayil, and Razvan Pascanu
 ## Summary
 
 - Problem with RL algorithms: learning and data generation are coupled, so in the process of learning, agents will determine the distribution of states visited. The "future" data distribution is stored in the replay buffer: a moving target problem.
-- 
 
 ## 1. Introduction
 
@@ -29,24 +28,21 @@ Tom Schaul, Diana Borsa, Joseph Modayil, and Razvan Pascanu
   - Expected performance: J = sum over all contexts pi(k | s_k). The other terms go away because the reward is only non-zero when k=a. Train network that predicts logits using policy gradient.
   - l = Ws+b (W is n x K, b is n x 1, s is a one-hot vector selecting a row of W). No sharing of the components in W, but b is shared.
 - Different types of interference:
-  - <img src="./images/cosine_distance.png" width="500px" />
-    
+  - <img src="./images/ray-interference/cosine_distance.png" width="500px" />
     - Cosine distance/similarity between the gradients of each component (task).
     - "Positive transfer" is beneficial sharing of weights
-  - <img src="./images/plateaus.png" width="500px" />
-   
+  - <img src="./images/ray-interference/plateaus.png" width="500px" />
+  
    - Solution reaches a saddle point, making learning much slower
-  - <img src="./images/wta.png" width="500px" />
-    
+  - <img src="./images/ray-interference/wta.png" width="500px" />
     - WTA where a gradient step only increases one component and decreases/doesn't affect the others is a "basin of attraction" toward a saddle point
 
 ## 3. Generalizations
 
 ### Higher Dimensional Bandit Problems
 
-- <img src="./images/more_dimensions.png" />
-
-    - Above shows the contextual bandits problem increased to higher dimensions.
+- <img src="./images/ray-interference/more_dimensions.png" />
+- Above shows the contextual bandits problem increased to higher dimensions.
     - Shows that as the number of tasks/components increases, the time it takes to overcome each hurdle increases exponentially. 2 hypotheses as to why this happens:
     - (1) For the last two components learned, they have been suppressed by interference for all stages of the learning curve up to that point. **Thus, all this negative transfer causes their performance to be worse to much worse than initially, causing learning to be slower later on.**
     - (2) Length of the plateau may have something to do with the previously learned K-1 tasks. **Starting to learn the Kth task will cause a "tug-of-war" with the previous K-1 tasks**, where the **K-1 tasks will try to adjust the weights back to where they were performing optimally**, leads to: "Only changes in null-space of K-1 tasks are preserved". **Restricting the optimization, which takes longer.**
