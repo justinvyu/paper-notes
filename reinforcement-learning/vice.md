@@ -51,3 +51,4 @@
 - **Question**: Confused as to what the discriminator and generator is in this case.
 
 ![vice-algorithm](/Users/justinvyu/Developer/paper-notes/reinforcement-learning/images/vice/vice-algorithm.png)
+
