@@ -2,39 +2,38 @@
 
 ## SSH
 
-Creating an SSH key:
+####Creating an SSH key:
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "[email]"
 ```
 
-Logging in via SSH:
+#### Logging in via SSH:
 
 ```bash
 ssh <user@remote>
 ```
 
+#### Installing Anaconda3 via SSH:
 
-
-## GPU Usage
-
-Specify which GPU to train on:
+Find the latest anaconda version on https://repo.continuum.io/archive/
 
 ```bash
-export CUDA_VISIBLE_DEVICES=1,2 # This selects GPUs 1 and 2.
+wget -c https://repo.continuum.io/archive/Anaconda3-<version>-Linux-x86_64.sh
+bash Anaconda3-<version>-Linux-x86_64.sh
 ```
 
-Check GPU usage:
+#### Installing `tensorflow-gpu` via SSH (Linux):
 
-```bash
-nvidia-smi # `watch nvidia-smi` for live updates
-```
+Follow this: https://github.com/williamFalcon/tensorflow-gpu-install-ubuntu-16.04
 
+This guide will install CUDA 9.0 with python 3.6.x, with tensorflow-gpu version <= 1.12.0.
 
+- `pip install -U ray`
+- `pip install serializable`
+- mujoco py
 
-## Tensorboard
-
-View tensorboard results on localhost:
+#### View tensorboard results on localhost:
 
 1. From the local machine:
 
@@ -50,3 +49,18 @@ View tensorboard results on localhost:
 
 3. View locally at `localhost:16006`
 
+   
+
+## GPU Usage
+
+#### Specify which GPU to train on:
+
+```bash
+export CUDA_VISIBLE_DEVICES=1,2 # This selects GPUs 1 and 2.
+```
+
+#### Check GPU usage:
+
+```bash
+nvidia-smi # `watch nvidia-smi` for live updates
+```

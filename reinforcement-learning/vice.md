@@ -27,6 +27,7 @@
 - Incorporate an additional variable $$e_t$$ that depends on state (and action): this is the "goal", and in the case of the paper, is a binary value, where 1 means that the goal has been reached.
 - We can model a conditional probability for this variable $$p(e_t | s_t, a_t)$$, and we can calculate the probability of the goal being reached, given a reward function: $$p(e_t = 1 | s_t, a_t)=e^{r(s_t, a_t)}$$
   - Requires rewards to be negative to satisfy the definition of a probability.
+  - The probability of an action happening in unlikely/low reward regions drops off exponentially, rather than being 0.
 - Define a "backward message" as the probability of achieving the goal from time t to T: $$\beta(s_t, a_t) = p(e_{t:T} = 1 | s_t, a_t)$$
   - Using this, we can frame it in an RL context with $$Q(s_t, a_t) = log \beta(s_t, a_t)$$, which can be expanded as: $$Q(s_t, a_t) = r(s_t, a_t) + log E[e^{V(s_{t+1})}]$$
   - We can also define the value function: $$V(s_t) = log \beta(s_t) = log (p(e_{t:T} = 1 | s_t))$$, which can be expanded as: $$V(s_t) = log E_a[e^{Q(s_t, a)}]$$. In the paper, $$V(s_t) = log \int_{a \in A} e^{Q(s_t, a)} da $$.
