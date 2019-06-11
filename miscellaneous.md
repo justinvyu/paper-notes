@@ -2,7 +2,7 @@
 
 ## SSH
 
-####Creating an SSH key:
+#### Creating an SSH key:
 
 ```bash
 ssh-keygen -t rsa -b 4096 -C "[email]"
@@ -64,3 +64,14 @@ export CUDA_VISIBLE_DEVICES=1,2 # This selects GPUs 1 and 2.
 ```bash
 nvidia-smi # `watch nvidia-smi` for live updates
 ```
+
+
+
+## VIM
+
+#### Replace all instances of `foo` with `bar`:
+
+```
+:%s/foo/bar/g
+```
+
