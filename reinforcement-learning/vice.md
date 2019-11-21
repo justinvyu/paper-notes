@@ -53,3 +53,25 @@
 
 ![vice-algorithm](/Users/justinvyu/Developer/paper-notes/reinforcement-learning/images/vice/vice-algorithm.png)
 
+
+
+## GANs
+
+Discriminator: $$D(x)=P(x \sim p_{data})$$
+
+We define its loss function to be: $$\mathcal{L}_D(x) = -E_{x \sim p_{data}}[logD(x)] - E_{x \sim p_{generated}}[log(1 - D(x))]$$
+
+- When the discriminator outputs a high probability of the observation being real ($$D(x) \approx 1$$), the loss will be close to 0. When $$D(x) \approx 0$$, the loss will approach positive infinity.
+
+The GAN training procedure:
+
+- Minimax game between a generator (G) and a discriminator (D)
+  - $$\min_{G} \max_{D} - \mathcal{L}_D = \min_{G} \max_{D} (E_{x \sim p_{data}}[logD(x)] + E_{x \sim p_{generated}}[log(1 - D(x))])$$
+  - The discriminator maximizes the negative objective for a given G, and the generator minimizes the negative objective for the given D, taking turns when training.
+  - The discriminator can be trained 
+
+## RL & GANs
+
+Idea: inverse reinforcement learning is similar to the GAN problem.
+
+The discriminator, which can classify a trajectory or a state/state-action, is playing against a policy (the generator), which can generate trajectories and state/state-actions.
